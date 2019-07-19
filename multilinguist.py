@@ -78,3 +78,38 @@ class Multilinguist:
     json_response = json.loads(response.text)
     return json_response['translationText']
 
+
+john = Multilinguist()
+
+print(john.language_in('France'))
+
+print(john.travel_to('Brazil'))
+
+# print (john.say_in_local_language('Hello'))
+# too many requests made won't print
+
+#---- MATH GENIUS ----
+
+class MathGenius(Multilinguist):
+
+  def report_total(self, number):
+    count = 0 
+    for num in number:
+      count += num
+    return 'The total is {}'.format(count)
+
+
+me = MathGenius()
+print(me.report_total([23,45,676,34,5778,4,23,5465])) # The total is 12048
+me.travel_to("India")
+print(me.report_total([6,3,6,68,455,4,467,57,4,534])) # है को कुल 1604
+me.travel_to("Italy")
+print(me.report_total([324,245,6,343647,686545])) # È Il totale 1030767
+
+#---- QUOTE COLLECTOR ----
+
+class QuoteCollector(Multilinguist):
+
+  def add_quote(self, quote):
+    quote_collection = []
+    
