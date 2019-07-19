@@ -1,5 +1,6 @@
 import requests
 import json
+from random import choice
 
 class Multilinguist:
   """This class represents a world traveller who knows 
@@ -85,7 +86,7 @@ print(john.language_in('France'))
 
 print(john.travel_to('Brazil'))
 
-# print (john.say_in_local_language('Hello'))
+print (john.say_in_local_language('Hello'))
 # too many requests made won't print
 
 #---- MATH GENIUS ----
@@ -96,7 +97,7 @@ class MathGenius(Multilinguist):
     count = 0 
     for num in number:
       count += num
-    return 'The total is {}'.format(count)
+    return self.say_in_local_language('The total is {}'.format(count))
 
 
 me = MathGenius()
@@ -110,6 +111,26 @@ print(me.report_total([324,245,6,343647,686545])) # È Il totale 1030767
 
 class QuoteCollector(Multilinguist):
 
+  def __init__(self):
+    super().__init__()
+    self.quote_collection = []
+
   def add_quote(self, quote):
-    quote_collection = []
-    
+    if quote in self.quote_collection:
+      return
+    self.quote_collection.append(quote)
+
+  def say_random_quote(self):
+    return self.say_in_local_language(choice(self.quote_collection))
+
+
+bob = QuoteCollector()
+
+bob.add_quote("I'll be back!")
+bob.add_quote("Supplies muthafucka!")
+bob.add_quote("Luke, I am your father.")
+bob.add_quote("I'll be back!")
+print(bob.say_random_quote())
+bob.travel_to('Brazil')
+print(bob.say_random_quote())
+print(bob.say_random_quote())
